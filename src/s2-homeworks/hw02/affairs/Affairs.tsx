@@ -1,27 +1,32 @@
 import React from 'react'
 import Affair from './affair/Affair'
-import {AffairType, FilterType} from '../HW2'
+import {AffairPriorityType, AffairType, FilterType} from '../HW2'
 import s from './Affairs.module.css'
 
+
 type AffairsPropsType = {
-    data: any // need to fix any
-    setFilter: any
-    deleteAffairCallback: any
+    data: Array<AffairType> // need to fix any
+    setFilter: (filter:AffairPriorityType)=>void
+    deleteAffairCallback: (_id:number)=>void
     filter: FilterType
 }
 
 function Affairs(props: AffairsPropsType) {
     const setAll = () => {
         // need to fix
+        return props.data.map(el=>el.priority==="all")
     }
     const setHigh = () => {
         // need to fix
+        return props.data.map(el=>el.priority==="high")
     }
     const setMiddle = () => {
         // need to fix
+        return props.data.map(el=>el.priority==="middle")
     }
     const setLow = () => {
         // need to fix
+        return props.data.map(el=>el.priority==="low")
     }
 
     const cnAll = s.button + ' ' + s.all + (props.filter === 'all' ? ' ' + s.active : '')

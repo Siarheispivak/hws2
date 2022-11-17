@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Affairs from './affairs/Affairs'
 import s2 from '../../s1-main/App.module.css'
 
+
 /*
 * 1 - описать типы AffairPriorityType, AffairType
 * 2 - указать нужный тип для defaultAffairs
@@ -59,7 +60,7 @@ function HW2() {
     const filteredAffairs = filterAffairs(affairs, filter)
     const deleteAffairCallback = (_id: number) => { // need to fix any
         // need to fix
-        return filteredAffairs.filter(el=>el._id !==_id )
+        return  affairs.filter(el=>el._id !==_id )
     }
 
     return (
