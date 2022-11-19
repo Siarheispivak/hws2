@@ -10,9 +10,9 @@ type AffairPropsType = {
 }
 
 function Affair(props: AffairPropsType) {
-    const deleteCallback = (id:number) => {
+    const deleteCallback = () => {
         // need to fix
-       return  id
+
     }
 
     const nameClass = s.name + ' ' + s2[props.affair.priority]
@@ -35,7 +35,7 @@ function Affair(props: AffairPropsType) {
                 {/**/}
             </div>
 
-            <button onClick={()=>deleteCallback(props.affair._id)}
+            <button onClick={()=>props.deleteAffairCallback(props.affair._id)}
                 id={'hw2-button-delete-' + props.affair._id}
                 className={buttonClass}
                 // need to fix
