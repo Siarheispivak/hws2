@@ -1,6 +1,7 @@
 .App {
     --header_height: 60px;
     padding-top: 107px;
+    padding-left: 30px;
 }
 
 .hw {
