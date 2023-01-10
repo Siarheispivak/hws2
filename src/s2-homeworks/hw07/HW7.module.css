@@ -1,7 +1,7 @@
 .container {
-    padding: 100px 10px;
+    padding: 30px 10px;
     width: 1280px;
-    height: 957px;
+    /*height: 957px;*/
     display: flex;
     gap: 30px;
 }
