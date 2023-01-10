@@ -1,15 +1,19 @@
 .radio {
-}
+    width: 24px;
+    height: 24px;
+    display: flex;
 
+}
 .radio::before {
 }
-
-
 .radio:checked::before {
 }
-
 .label {
+    display: flex;
+    gap: 20px;
 }
-
 .options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

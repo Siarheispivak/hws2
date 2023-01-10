@@ -1,4 +1,5 @@
 .spanBlock {
+
 }
 
 .span {
@@ -8,4 +9,6 @@
 }
 
 .pen {
+    background: #0080FF;
+    opacity: 0;
 }
