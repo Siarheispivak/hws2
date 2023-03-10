@@ -20,11 +20,11 @@ function Clock() {
         setTimerId(id)
         setShow(true)
     }
-
     const stop = () => {
         // пишут студенты // поставить часы на паузу, обнулить ид таймера (timerId <- undefined)
         clearInterval(timerId)
         setShow(false)
+        setTimerId(undefined)
 
     }
 
@@ -43,30 +43,32 @@ function Clock() {
             return num
         }
     }
-
     const stringTimeFunction = () => {
         let hours = twoDigits(date.getHours())
         let minutes = twoDigits(date.getMinutes())
         let seconds = twoDigits(date.getSeconds())
-        // console.log(`${hours} : ${minutes} : ${seconds}`)
-        return `${hours} : ${minutes} : ${seconds}`
+        return `${hours}:${minutes}:${seconds}`
     }
     const stringTime = stringTimeFunction() || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
 
-
     const stringDateFunction = () => {
         let days = twoDigits(date.getDate())
-        let month = twoDigits(date.getMonth())
+        let month = twoDigits(date.getMonth() + 1)
         let years = twoDigits(date.getFullYear())
-        // console.log(`${days} : ${month} : ${years}`)
-        return `${days} : ${month} : ${years}`
+        return `${days}.${month}.${years}`
     }
     const stringDate = stringDateFunction() || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
 
-    // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
-    const stringDay = twoDigits(date.getDay()) || <br/> // пишут студенты
-    const stringMonth = twoDigits(date.getMonth()) || <br/> // пишут студенты
 
+    // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
+    let dayOptions: Intl.DateTimeFormatOptions = {
+        weekday: 'long'
+    };
+    const stringDay = date.toLocaleString("en-US", dayOptions) || <br/> // пишут студенты
+    let monthOptions:Intl.DateTimeFormatOptions = {
+        month: 'long'
+    };
+    const stringMonth = date.toLocaleString("en-US", monthOptions) || <br/> // пишут студенты
     return (
         <div className={s.clock}>
             <div
@@ -99,14 +101,14 @@ function Clock() {
             <div className={s.buttonsContainer}>
                 <SuperButton
                     id={'hw9-button-start'}
-                    disabled={show} // пишут студенты // задизэйблить если таймер запущен
+                    disabled={!!timerId} // пишут студенты // задизэйблить если таймер запущен
                     onClick={start}
                 >
                     start
                 </SuperButton>
                 <SuperButton
                     id={'hw9-button-stop'}
-                    disabled={!show} // пишут студенты // задизэйблить если таймер не запущен
+                    disabled={!timerId} // пишут студенты // задизэйблить если таймер не запущен
                     onClick={stop}
                 >
                     stop
