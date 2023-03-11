@@ -36,7 +36,7 @@ const HW10 = () => {
             <div className={s2.hw}>
                 {isLoading ? (
                     <div id={'hw10-loading'}>
-                        dsfhgjkhjkg
+                        LOADING...
                         <Loader/>
                     </div>
                 ) : (
