@@ -2,7 +2,7 @@
 /*    !*свг и/или анимация*!*/
 /*}*/
 .loader {
-    color: #65abf8;
+    color: #512DE4FF;
     font-size: 10px;
     margin: 50px auto;
     width: 1em;
@@ -15,6 +15,8 @@
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
+
+
 }
 @-webkit-keyframes load4 {
     0%,

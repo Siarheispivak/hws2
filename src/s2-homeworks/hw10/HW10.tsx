@@ -40,7 +40,7 @@ const HW10 = () => {
                         <Loader/>
                     </div>
                 ) : (
-                    <SuperButton
+                    <SuperButton className={s2.setLoading}
                         id={'hw10-button-start-loading'}
                         onClick={setLoading}
                     >
