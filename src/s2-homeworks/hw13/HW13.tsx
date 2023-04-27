@@ -21,10 +21,9 @@ const HW13 = () => {
     const [image, setImage] = useState('')
 
     const send = (x?: boolean | null) => () => {
-        const url =
-            x === null
-                ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
-                : 'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test'
+        const url = x === null
+            ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
+            : ' https://samurai.it-incubator.io/api/3.0'
 
         setCode('')
         setImage('')
@@ -32,16 +31,30 @@ const HW13 = () => {
         setInfo('...loading')
 
         axios
-            .post(url, {success: x})
-            .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
-                // дописать
-
-            })
+            .post(url, {success: x}).then((res) => {
+            setCode('Код 200!')
+            setImage(success200)
+            // дописать
+            setInfo(res.data.info)
+            setText(res.data.errorText)
+            return res.data
+        })
             .catch((e) => {
                 // дописать
+                if (e.response.status) {
+                    console.log(e.response.data.error)
+                    setCode(`Ошибка ${e.response.status}!!`)
+                    setImage(e.response.status === 500 ? error500 : error400)
+                    setInfo(e.response.data.info)
+                    setText(e.response.data.errorText)
 
+                } else {
+                    // console.log(e.name, e.message)
+                    setImage(errorUnknown)
+                    setCode('Error')
+                    setInfo(e.name)
+                    setText(e.message)
+                }
             })
     }
 
@@ -56,6 +69,7 @@ const HW13 = () => {
                         onClick={send(true)}
                         xType={'secondary'}
                         // дописать
+
 
                     >
                         Send true
@@ -74,6 +88,7 @@ const HW13 = () => {
                         onClick={send(undefined)}
                         xType={'secondary'}
                         // дописать
+                        disabled={info === "...loading"}
 
                     >
                         Send undefined
