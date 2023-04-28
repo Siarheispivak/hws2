@@ -21,39 +21,43 @@ const HW13 = () => {
     const [image, setImage] = useState('')
 
     const send = (x?: boolean | null) => () => {
-        const url = x === null
-            ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
-            : ' https://samurai.it-incubator.io/api/3.0'
+        const url = x === null ? 'https://xxxxxx.ccc' : 'https://samurai.it-incubator.io/api/3.0/homework/test'// имитация запроса на не корректный адрес
 
         setCode('')
         setImage('')
         setText('')
         setInfo('...loading')
 
-        axios
-            .post(url, {success: x}).then((res) => {
-            setCode('Код 200!')
-            setImage(success200)
-            // дописать
-            setInfo(res.data.info)
-            setText(res.data.errorText)
-            return res.data
-        })
+        axios.post(url, {success: x})
+            .then((res) => {
+                setCode('Код 200 - !')
+                setImage(success200)
+                // дописать
+
+                setInfo('код 200 - обычно означает что скорее всего всё ок)')
+                setText(res.data.errorText)
+            })
             .catch((e) => {
                 // дописать
-                if (e.response.status) {
-                    console.log(e.response.data.error)
-                    setCode(`Ошибка ${e.response.status}!!`)
-                    setImage(e.response.status === 500 ? error500 : error400)
-                    setInfo(e.response.data.info)
-                    setText(e.response.data.errorText)
+                switch (e.response.status) {
+                    case 400:
+                        setCode(`Ошибка400!!`)
+                        setImage(error400)
+                        setInfo('ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
+                        setText('Ты не отправил success в body вообще!')
+                       break;
+                    case 500:
+                        setCode(`Ошибка500!!`)
+                        setImage(error500)
+                        setInfo('ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
+                        setText('эмитация ошибки на сервере')
+                       break;
+                    default:
+                        setImage(errorUnknown)
+                        setCode('Error')
+                        setInfo('Network Error')
+                        setText('AxiosError')
 
-                } else {
-                    // console.log(e.name, e.message)
-                    setImage(errorUnknown)
-                    setCode('Error')
-                    setInfo(e.name)
-                    setText(e.message)
                 }
             })
     }
@@ -69,7 +73,7 @@ const HW13 = () => {
                         onClick={send(true)}
                         xType={'secondary'}
                         // дописать
-
+                        disabled={info === "...loading"}
 
                     >
                         Send true
@@ -79,7 +83,7 @@ const HW13 = () => {
                         onClick={send(false)}
                         xType={'secondary'}
                         // дописать
-
+                        disabled={info === "...loading"}
                     >
                         Send false
                     </SuperButton>
@@ -98,7 +102,7 @@ const HW13 = () => {
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
                         // дописать
-
+                        disabled={info === "...loading"}
                     >
                         Send null
                     </SuperButton>
