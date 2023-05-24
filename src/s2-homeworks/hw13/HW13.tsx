@@ -21,7 +21,9 @@ const HW13 = () => {
     const [image, setImage] = useState('')
 
     const send = (x?: boolean | null) => () => {
-        const url = x === null ? 'https://xxxxxx.ccc' : 'https://samurai.it-incubator.io/api/3.0/homework/test'// имитация запроса на не корректный адрес
+        const url = x === null
+            ? 'https://xxxxxx.ccc'
+            : 'https://samurai.it-incubator.io/api/3.0/homework/test'// имитация запроса на не корректный адрес
 
         setCode('')
         setImage('')
