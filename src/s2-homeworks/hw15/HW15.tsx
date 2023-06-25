@@ -57,36 +57,69 @@ const HW15 = () => {
                     console.log(res.data)
                     setTotalCount(res.data.totalCount)
                     setTechs(res.data.techs)
-                    setLoading(false)
                 }
                 // сохранить пришедшие данные
-
+                setLoading(false)
                 //
             })
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
+
+        const newParams = {...Object.fromEntries(searchParams), page: newPage + '', count: newCount + ''}
+
         // делает студент
-
         setPage(newPage)
+        // setPage(
+        // setCount(
         setCount(newCount)
-        sendQuery({newPage,newCount})
-        setSearchParams()
-
+        // sendQuery(
+        sendQuery(newParams)
+        // setSearchParams(
+        setSearchParams(newParams)
         //
     }
 
     const onChangeSort = (newSort: string) => {
         // делает студент
 
+        const newParams = {...Object.fromEntries(searchParams), sort: newSort, page: '1'}
+
+        // setSort(
         setSort(newSort)
+        // setSort(newSort)
         setPage(1) // при сортировке сбрасывать на 1 страницу
-
-        sendQuery({sort,page,count})
-        setSearchParams()
-
+        // setPage()
+        // sendQuery(
+        sendQuery(newParams)
+        // setSearchParams(
+        setSearchParams(newParams)
         //
     }
+
+
+    // const onChangePagination = (newPage: number, newCount: number) => {
+    //     // делает студент
+    //
+    //     setPage(newPage)
+    //     setCount(newCount)
+    //     sendQuery({sort,newPage,newCount})
+    //     setSearchParams()
+    //
+    //     //
+    // }
+    //
+    // const onChangeSort = (newSort: string) => {
+    //     // делает студент
+    //
+    //     setSort(newSort)
+    //     setPage(1) // при сортировке сбрасывать на 1 страницу
+    //
+    //     sendQuery({sort,page,count})
+    //     setSearchParams()
+    //
+    //     //
+    // }
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams)
