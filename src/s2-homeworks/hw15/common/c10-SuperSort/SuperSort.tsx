@@ -14,7 +14,13 @@ export type SuperSortPropsType = {
 
 export const pureChange = (sort: string, down: string, up: string) => {
     // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
-    return up // исправить
+    if(sort === down) {
+        return up
+    }else if(sort === up ){
+        return '';
+    }else{
+        return down
+    }
 }
 
 const SuperSort: React.FC<SuperSortPropsType> = (
@@ -27,26 +33,25 @@ const SuperSort: React.FC<SuperSortPropsType> = (
 
     const onChangeCallback = () => {
         onChange(pureChange(sort, down, up))
+        console.log(down)
+        console.log(up)
     }
 
-    const icon = sort === down
-        ? downIcon
-        : sort === up
-            ? upIcon
-            : noneIcon
+    const icon = sort === down ? downIcon : sort === up
+                               ? upIcon : noneIcon
 
     return (
         <span
             id={id + '-sort-' + value}
             onClick={onChangeCallback}
         >
-            {/*сделать иконку*/}
-            {/*<img*/}
-            {/*    id={id + '-icon-' + sort}*/}
-            {/*    src={icon}*/}
-            {/*/>*/}
+            сделать иконку
+            <img
+                id={id + '-icon-' + sort}
+                src={icon}
+            />
 
-            {icon} {/*а это убрать*/}
+            {/*{icon} /!*а это убрать*!/*/}
         </span>
     )
 }
